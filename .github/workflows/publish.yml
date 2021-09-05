@@ -20,14 +20,20 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.14.5
+          version: 6
       - run: |
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/registry/:_password=${{ secrets.PAT_B64 }}
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/:_password=${{ secrets.PAT_B64 }}
       - run: pnpm install --frozen-lockfile --prefer-offline
-  publish:
+  test:
+    runs-on: ubuntu-latest
     needs: cache-pnpm
-    name: Publish
+    name: Test
+    steps:
+      - run: echo tested!
+  build:
+    needs: test
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,10 +48,10 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.14.5
+          version: 6
       - run: |
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/registry/:_password=${{ secrets.PAT_B64 }}
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/:_password=${{ secrets.PAT_B64 }}
       - run: pnpm install --frozen-lockfile --prefer-offline
-      - run: echo In real case, you would build here.
-      # - run: pnpm publish -r
+      - run: echo built!
+      - run: pnpm publish -r
