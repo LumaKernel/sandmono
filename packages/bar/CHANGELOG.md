@@ -1,5 +1,11 @@
 # @sand/bar
 
+## 0.1.3
+
+### Patch Changes
+
+- 008e569: release trigger
+
 ## 0.1.2
 
 ### Patch Changes
