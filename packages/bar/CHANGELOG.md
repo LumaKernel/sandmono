@@ -1,5 +1,14 @@
 # @sand/bar
 
+## 0.1.4
+
+### Patch Changes
+
+- 7fedc52: add documents!
+- Updated dependencies [7fedc52]
+- Updated dependencies [d03d57a]
+  - @sand/foo@0.1.2
+
 ## 0.1.3
 
 ### Patch Changes
