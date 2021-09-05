@@ -1,4 +1,4 @@
-name: Release
+name: Release PR
 
 on:
   push:
@@ -6,6 +6,33 @@ on:
       - master
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
   cache-pnpm:
     name: Cache Pnpm
     runs-on: ubuntu-20.04
@@ -18,22 +45,21 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: pnpm/action-setup@v2
         with:
-          version: 6.13.0
+          version: 6.14.5
       - run: |
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/registry/:_password=${{ secrets.PAT_B64 }}
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/:_password=${{ secrets.PAT_B64 }}
       - run: pnpm install --frozen-lockfile --prefer-offline
   release:
-    name: Release
+    needs: cache-pnpm
+    name: Release PR
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/checkout@v2
       - name: Cache pnpm modules
         uses: actions/cache@v2
         with:
@@ -43,7 +69,7 @@ jobs:
             ${{ runner.os }}-
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.13.0
+          version: 6.14.5
       - run: |
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/registry/:_password=${{ secrets.PAT_B64 }}
           pnpm config set //pkgs.dev.azure.com/lumadev/_packaging/lumadev/npm/:_password=${{ secrets.PAT_B64 }}
