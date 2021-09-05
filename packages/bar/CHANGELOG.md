@@ -1,5 +1,11 @@
 # @sand/bar
 
+## 0.1.2
+
+### Patch Changes
+
+- tiny fix
+
 ## 0.1.1
 
 ### Patch Changes
