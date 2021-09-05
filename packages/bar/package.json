@@ -1,5 +1,5 @@
 {
-  "name": "@luma-dev/bar",
+  "name": "@sand/bar",
   "main": "index.js",
   "version": "0.0.0",
   "dependencies": {
