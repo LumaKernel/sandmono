@@ -1,0 +1,11 @@
+{
+  "name": "sandmono",
+  "private": true,
+  "main": "index.js",
+  "author": "Luma<world@luma.email>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LumaKernel/sandmono/issues"
+  },
+  "homepage": "https://github.com/LumaKernel/sandmono#readme"
+}

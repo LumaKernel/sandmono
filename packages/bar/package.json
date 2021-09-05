@@ -1,0 +1,8 @@
+{
+  "name": "@luma-dev/bar",
+  "main": "index.js",
+  "version": "0.0.0",
+  "dependencies": {
+    "@luma-dev/foo": "workspace:*"
+  }
+}
