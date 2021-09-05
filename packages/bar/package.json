@@ -3,6 +3,6 @@
   "main": "index.js",
   "version": "0.1.0",
   "dependencies": {
-    "@luma-dev/foo": "workspace:*"
+    "@sand/foo": "workspace:*"
   }
 }

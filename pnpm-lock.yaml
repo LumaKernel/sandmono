@@ -8,11 +8,14 @@ importers:
     devDependencies:
       '@changesets/cli': 2.17.0
 
+  examples/real:
+    specifiers: {}
+
   packages/bar:
     specifiers:
-      '@luma-dev/foo': workspace:*
+      '@sand/foo': workspace:*
     dependencies:
-      '@luma-dev/foo': link:../foo
+      '@sand/foo': link:../foo
 
   packages/foo:
     specifiers: {}
