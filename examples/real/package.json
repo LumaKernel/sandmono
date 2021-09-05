@@ -1,4 +1,7 @@
 {
   "name": "@examples/real",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@sand/foo": "0.1.0"
+  }
 }
